@@ -1,5 +1,13 @@
-<<<<<<< HEAD
-Deno.serve(() => new Response("hello, world"));
-=======
-Deno.serve(() => new Response("I will learn how to write web applications!"));
->>>>>>> cc3bf327a2c7954c14bbc6afc1e3ddc4fa79af3c
+const handleRequest = (request) => {
+	const url = new URL(request.url);
+
+	let message = "hello";
+	if (url.pathname === "/hello") {
+		message = "world";
+	} else if (url.pathname.includes("secret")) {
+		message = "ingredient";
+	}
+	return new Response(message);
+};
+
+Deno.serve(handleRequest);
